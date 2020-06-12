@@ -1,21 +1,36 @@
-const express = require('express');
-const path = require('path'); // NEW
-
-const app = express();
+const restify = require('restify')
+const fs = require('fs')
+const indexHTML = fs.readFileSync('./dist/index.html').toString();
 const port = process.env.PORT || 3000;
+const server = restify.createServer({
+  name: 'FastShopping',
+  ignoreTrailingSlash: true
+})
+/**
+ * Server Routes
+ */
+// Setup routes
+require('./router/categoriesRouter')(server)
+require('./router/customerRouter')(server)
+require('./router/ordersRouter')(server)
+require('./router/productsRouter')(server)
 /**
  * Client URL
  */
-const DIST_DIR = path.join(__dirname, '../dist'); // NEW
-const HTML_FILE = path.join(DIST_DIR, 'index.html'); // NEW
-app.use(express.static(DIST_DIR)); // NEW
-app.get('/', (req, res) => {
-  res.sendFile(HTML_FILE); // EDIT
-});
+server.get('/*', restify.plugins.serveStatic({
+  directory: './dist',
+  default: 'index.html'
+}))
+// Hacky solution to fix client-side routing
+server.on('restifyError', (req, res, err, cb) => {
+  if (err.jse_cause && err.jse_cause.code === 'ENOENT') {
+    res.sendRaw(indexHTML)
+  } else {
+    return cb()
+  }
+})
+/**
+ * Api Docs
+ */
 
-app.get('/api', (req, res) => {
-  //res.send(mockResponse);
-});
-app.listen(port, function () {
-  console.log('App listening on port: ' + port);
-});
+server.listen(port);
