@@ -1,4 +1,5 @@
-module.exports = server => {
+var models = require('../models');
+module.exports = (server) => {
     /**
      * @swagger
      * /api/categories:
@@ -12,10 +13,10 @@ module.exports = server => {
      *       200:
      *         description: Successful operation
      */
-    server.get('/api/categories', function(req, res) {
-        res.send('im the product page!');
-    });
-    server.post('/api/categories', function(req, res) {
-        res.send('im the product page!');
+    server.get('/api/categories', function(req, res, next) {
+        models.Categories.findAll().then(function(categories){
+            res.send(categories);
+            return next();
+        });
     });
 }

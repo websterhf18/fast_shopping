@@ -12,11 +12,13 @@
   "license": "ISC",
   "homepage": "https://github.com/websterhf18/fast_shopping#readme",
   "dependencies": {
+    "mysql2": "^2.1.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "restify": "^7.2.2",
     "restify-errors": "^6.1.1",
-    "restify-swagger-jsdoc": "^3.2.3"
+    "restify-swagger-jsdoc": "^3.2.3",
+    "sequelize": "^5.21.12"
   },
   "devDependencies": {
     "@babel/core": "^7.10.2",

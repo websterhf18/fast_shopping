@@ -6,10 +6,14 @@ const server = restify.createServer({
   name: 'FastShopping',
   ignoreTrailingSlash: true
 })
+server.use(restify.plugins.bodyParser({
+  mapParams: true,
+  mapFiles: false,
+  overrideParams: false
+}));
 /**
  * Server Routes
  */
-// Setup routes
 require('./router/categoriesRouter')(server)
 require('./router/customerRouter')(server)
 require('./router/ordersRouter')(server)
