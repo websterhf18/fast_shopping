@@ -1,18 +1,16 @@
 module.exports = server => {
     /**
      * @swagger
-     * /api/puppies:
+     * /api/categories:
      *   get:
+     *     description: Get all categories
      *     tags:
-     *       - Puppies
-     *     description: Returns all puppies
+     *       - Categories
      *     produces:
      *       - application/json
      *     responses:
      *       200:
-     *         description: An array of puppies
-     *         schema:
-     *           $ref: '#/definitions/Puppy'
+     *         description: Successful operation
      */
     server.get('/api/categories', function(req, res) {
         res.send('im the product page!');

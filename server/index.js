@@ -32,5 +32,13 @@ server.on('restifyError', (req, res, err, cb) => {
 /**
  * Api Docs
  */
+var restifySwaggerJsdoc = require('restify-swagger-jsdoc');
+restifySwaggerJsdoc.createSwaggerPage({
+    title: 'API documentation',
+    version: '1.0.0',
+    server: server,
+    path: '/api-docs',
+    apis: [ `${__dirname}/router/*.js` ], 
+});
 
 server.listen(port);
