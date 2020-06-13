@@ -36,14 +36,18 @@ module.exports = server => {
      *         type: string
      *       - name: info_user
      *         description: Info object of user.
-     *         in: formData
+     *         in: body
      *         required: true
-     *         type: object
+     *         schema:
+     *           $ref: '#/definitions/Customer'
      *       - name: products
      *         description: Products of order.
-     *         in: formData
+     *         in: body
      *         required: true
-     *         type: object
+     *         schema:
+     *           type: array
+     *           items:
+     *             $ref: '#/definitions/Products'
      *     responses:
      *       400:
      *         description: Missing Field
@@ -60,44 +64,52 @@ module.exports = server => {
         }
         return result;
     };
-    function createOrderProducts(userData, products){
-        //Create Order
+    function createOrder(userData){
         var codeOrder = generateCodeOrder();
-        models.Orders.create({
+        var order = models.Orders.create({
             code: codeOrder,
             status: 'pending',
             customers_id: userData.id 
-        }).then(order => {
-            //Create Products
-            products.forEach(function(products, index, arr) {
-                models.Products_Order.create({
-                    quantity: products.quantity,
-                    products_id: products.products_id,
-                    orders_id: order.id
-                });
-            });
-            return order;
-        })
+        });
+        return order;
+    }
+    function createProductsOrder(product, order_id){
+        var productOrder = models.Products_Order.create({
+            quantity: product.quantity,
+            products_id: product.products_id,
+            orders_id: order_id 
+        });
+        return productOrder;
     }
     server.post('/api/orders', function(req, res, next) {
         if (req.body.type_user && req.body.info_user && req.body.products) {
-            var userData;
-            //Create User
-            if(req.body.type_user == 'new'){
+            if(req.body.type_user === 'new'){
                 models.Customers.create({
                     fullname: req.body.info_user.fullname,
                     phone: req.body.info_user.phone,
                     address: req.body.info_user.address,
                     email: req.body.info_user.email   
                 }).then(user => {
-                   userData = { id : user.id }; 
-                   var orderData = createOrderProducts(userData, req.body.products);
-                   res.send(orderData);
+                    var userData = { id : user.id }; 
+                    var orderData = createOrder(userData);
+                    orderData.then(order => {
+                        var products = req.body.products;
+                        products.forEach(product => {
+                            createProductsOrder(product, order.id);
+                        });
+                        res.send(order);
+                    });
                 })
             }else{
-                userData = req.body.info_user
-                var orderData = createOrderProducts(userData, req.body.products);
-                res.send(orderData);
+                var userData = req.body.info_user
+                var orderData = createOrder(userData);
+                orderData.then(order => {
+                    var products = req.body.products;
+                    products.forEach(product => {
+                        createProductsOrder(product, order.id);
+                    });
+                    res.send(order);
+                });
             }
         } else {
             res.send(400, { response: "Missing Field" });

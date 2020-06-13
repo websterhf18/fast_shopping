@@ -85,7 +85,7 @@ ENGINE = InnoDB;
 -- Table `fast_shopping`.`products_order`
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fast_shopping`.`products_order` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `quantity` VARCHAR(45) NULL,
   `products_id` INT NOT NULL,
   `orders_id` INT NOT NULL,

@@ -10,7 +10,9 @@ module.exports = (sequelize, DataTypes) => {
         products_id: DataTypes.INTEGER,
         orders_id: DataTypes.INTEGER
     },{
-        timestamps: false
+        timestamps: false,
+        freezeTableName: true,
+        tableName: 'products_order'
     });
     return Products_Order;
 };

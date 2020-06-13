@@ -21,6 +21,18 @@ module.exports = server => {
     });
     /**
      * @swagger
+     * definitions:
+     *  Customer:
+     *       type: object
+     *       properties:
+     *           fullname:
+     *               type: string
+     *           phone:
+     *               type: string
+     *           address:
+     *               type: string
+     *           email:
+     *               type: string
      * /api/customer/find:
      *   post:
      *     description: Get all Customers

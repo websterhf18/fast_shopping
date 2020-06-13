@@ -2,6 +2,16 @@ var models = require('../models');
 module.exports = server => {
     /**
      * @swagger
+     * definitions:
+     *  Products:
+     *       type: object
+     *       properties:
+     *           quantity:
+     *               type: integer
+     *               format: int32
+     *           product_id:
+     *               type: integer
+     *               format: int32
      * /api/products:
      *   get:
      *     description: Get all Products
