@@ -13,7 +13,7 @@ const initialProps = {
             title: 'Item1',
             price: 800,
             category: 'Cat1',
-            quantity: 1
+            quantity: 2
         },
         {
             title: 'Item1',

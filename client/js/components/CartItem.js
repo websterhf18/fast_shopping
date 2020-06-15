@@ -71,11 +71,12 @@ export default function CartItem({ product }){
                             <Select
                             labelId="demo-simple-select-label"
                             id="demo-simple-select"
-                            value={''}
+                            value={product.quantity}
                             >
-                                <MenuItem value={10}>Ten</MenuItem>
-                                <MenuItem value={20}>Twenty</MenuItem>
-                                <MenuItem value={30}>Thirty</MenuItem>
+                                <MenuItem value={1}>1</MenuItem>
+                                <MenuItem value={2}>2</MenuItem>
+                                <MenuItem value={3}>3</MenuItem>
+                                <MenuItem value={4}>4</MenuItem>
                             </Select>
                         </FormControl>
                     </Grid>

@@ -10,15 +10,20 @@ import IconButton from '@material-ui/core/IconButton'
 import Badge from '@material-ui/core/Badge'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 
+import { connect } from "react-redux";
+
 const useStyles = makeStyles((theme) => ({
     toolbarButtons: {
         marginLeft: 'auto',
     },
 }));
-
-export default function Header(){
+const mapStateToProps = state => {
+    return {
+        cart: state.shop.cart
+    }
+};
+function Header(props){
     const classes = useStyles();
-    //const {match: {url}} = this.props;
     return(
         <AppBar position="static">
             <Toolbar>
@@ -28,7 +33,7 @@ export default function Header(){
                 <div className={classes.toolbarButtons}>
                     <IconButton color="inherit" aria-label="add to shopping cart">
                         <Badge
-                            badgeContent={99}
+                            badgeContent={props.cart.length}
                             color="secondary"
                             anchorOrigin={{
                                 vertical: 'top',
@@ -43,3 +48,4 @@ export default function Header(){
         </AppBar>
     );
 }
+export default connect(mapStateToProps, null)(Header);
