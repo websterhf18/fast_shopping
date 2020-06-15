@@ -1,11 +1,19 @@
 const restify = require('restify')
 const fs = require('fs')
 const indexHTML = fs.readFileSync('./dist/index.html').toString();
+const corsMiddleware = require('restify-cors-middleware')
+const cors = corsMiddleware({  
+  origins: ["*"],
+  allowHeaders: ["Authorization"],
+  exposeHeaders: ["Authorization"]
+});
 const port = process.env.PORT || 3000;
 const server = restify.createServer({
   name: 'FastShopping',
   ignoreTrailingSlash: true
 })
+server.pre(cors.preflight);  
+server.use(cors.actual);
 server.use(restify.plugins.bodyParser({
   mapParams: true,
   mapFiles: false,

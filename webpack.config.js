@@ -5,11 +5,17 @@ const htmlPlugin = new HtmlWebPackPlugin({
   filename: "./index.html"
 });
 module.exports = {
-  entry: "./client/js/app.js",
+  entry: "./client/js/index.js",
   output: { // NEW
     path: path.join(__dirname, 'dist'),
     filename: "[name].js"
   }, // NEW Ends
+  resolve: {
+    extensions: ['*', '.js', '.jsx']
+  },
+  devServer: {
+    historyApiFallback: true,
+  },
   plugins: [htmlPlugin],
   module: {
     rules: [

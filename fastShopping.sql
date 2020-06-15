@@ -33,7 +33,7 @@ ENGINE = InnoDB;
 -- -----------------------------------------------------
 CREATE TABLE IF NOT EXISTS `fast_shopping`.`products` (
   `id` INT NOT NULL AUTO_INCREMENT,
-  `unit_price` INT NULL,
+  `unit_price` FLOAT NULL,
   `name` VARCHAR(255) NULL,
   `description` TEXT NULL,
   `thumbnail` VARCHAR(255) NULL,
