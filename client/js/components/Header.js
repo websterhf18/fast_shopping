@@ -11,6 +11,8 @@ import Badge from '@material-ui/core/Badge'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 
 import { connect } from "react-redux";
+import { Link as RouterLink } from 'react-router-dom';
+import Link from '@material-ui/core/Link';
 
 const useStyles = makeStyles((theme) => ({
     toolbarButtons: {
@@ -31,18 +33,22 @@ function Header(props){
                     Fast shopping
                 </Typography>
                 <div className={classes.toolbarButtons}>
-                    <IconButton color="inherit" aria-label="add to shopping cart">
-                        <Badge
-                            badgeContent={props.cart.length}
-                            color="secondary"
-                            anchorOrigin={{
-                                vertical: 'top',
-                                horizontal: 'right',
-                            }}
-                        >
-                            <AddShoppingCartIcon />
-                        </Badge>
-                    </IconButton>
+                    <Link component={RouterLink} to="/cart" color="inherit">
+                        <IconButton
+                        color="inherit" 
+                        aria-label="add to shopping cart">
+                            <Badge
+                                badgeContent={props.cart.length}
+                                color="secondary"
+                                anchorOrigin={{
+                                    vertical: 'top',
+                                    horizontal: 'right',
+                                }}
+                            >
+                                <AddShoppingCartIcon />
+                            </Badge>
+                        </IconButton>
+                    </Link>
                 </div>
             </Toolbar>
         </AppBar>

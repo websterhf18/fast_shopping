@@ -21,6 +21,13 @@ class Checkout extends React.Component{
     componentDidMount() {
         //
     }
+    getTotalCart(){
+        var total = 0;
+        this.props.cart.forEach(element => {
+            total += element.unit_price
+        });
+        return total;
+    }
     render(){
         return(
             <>
@@ -57,7 +64,7 @@ class Checkout extends React.Component{
                             padding: '20px 24px'
                         }}
                         component="h5" variant="h5">
-                            Total: $999
+                            Total: $ {this.getTotalCart()}
                         </Typography>
                         <Button 
                         style={{

@@ -1,4 +1,6 @@
 import React from 'react';
+import { useDispatch } from "react-redux";
+import { addProductCart } from "../actions";
 
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
@@ -26,6 +28,11 @@ const useStyles = makeStyles((theme) => ({
 }));
 export default function ProductItem({ product }){
     const classes = useStyles();
+    const dispatch = useDispatch();
+    const addToCart = (product) => {
+        product.quantity = 1;
+        dispatch(addProductCart(product));
+    }
     return(
         <>
             <Card className={classes.container}>
@@ -46,7 +53,9 @@ export default function ProductItem({ product }){
                         </Typography>
                     </CardContent>
                     <CardContent className={classes.bottom}>
-                        <Button variant="contained" color="primary">
+                        <Button 
+                        onClick={() => addToCart(product)}
+                        variant="contained" color="primary">
                             Add to cart
                         </Button>
                         <Typography component="h5" variant="h5">

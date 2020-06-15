@@ -51,10 +51,10 @@ export default function CartItem({ product }){
                     </Grid>
                     <Grid item xs={5}>
                         <Typography component="h5" variant="h5">
-                            {product.title}
+                            {product.name}
                         </Typography>
                         <Typography variant="subtitle1" color="textSecondary">
-                            {product.category}
+                            {product.category.name}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
@@ -62,7 +62,7 @@ export default function CartItem({ product }){
                             Unit price:
                         </Typography>
                         <Typography component="h5" variant="h5">
-                            $ {product.price}
+                            $ {product.unit_price}
                         </Typography>
                     </Grid>
                     <Grid item xs={2}>
@@ -82,7 +82,7 @@ export default function CartItem({ product }){
                     </Grid>
                     <Grid item xs={2}>
                         <Typography component="h5" variant="h5">
-                            Total: $999
+                            Total: $ {product.unit_price}
                         </Typography>
                     </Grid>
                 </Grid>

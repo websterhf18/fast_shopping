@@ -4,17 +4,20 @@ import Main from './pages/Main';
 import Box from '@material-ui/core/Box';
 import './App.scss';
 
-import store from "./store";
+import { store, persistor } from "./store";
 import { Provider } from 'react-redux';
+import { PersistGate } from 'redux-persist/integration/react'
 
 function App() {
   return (
     <div className="App">
       <Provider store={store}>
-        <Box>
-          <Header />
-          <Main />
-        </Box>
+        <PersistGate loading={null} persistor={persistor}>
+          <Box>
+            <Header />
+            <Main />
+          </Box>
+        </PersistGate>
       </Provider>
     </div>
   );

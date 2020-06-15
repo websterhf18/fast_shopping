@@ -22,10 +22,10 @@ export default function CheckoutSummary({products}){
                     <TableBody>
                         { products.map((item, index) => (
                             <TableRow key={index}>
-                                <TableCell>{item.title}</TableCell>
-                                <TableCell>$ {item.price}</TableCell>
+                                <TableCell>{item.name}</TableCell>
+                                <TableCell>$ {item.unit_price}</TableCell>
                                 <TableCell>{item.quantity}</TableCell>
-                                <TableCell>$ {item.price}</TableCell>
+                                <TableCell>$ {item.unit_price}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

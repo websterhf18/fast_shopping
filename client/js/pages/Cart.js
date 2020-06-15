@@ -4,9 +4,12 @@ import { connect } from "react-redux";
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
+
+import { Link as RouterLink } from 'react-router-dom';
 import Link from '@material-ui/core/Link';
 
 import CartItem from '../components/CartItem';
+
 
 const mapStateToProps = state => {
     return {
@@ -21,6 +24,14 @@ class Cart extends React.Component{
     componentDidMount() {
         //
     }
+    getTotalCart(){
+        var total = 0;
+        this.props.cart.forEach(element => {
+            total += element.unit_price
+        });
+        return total;
+    }
+    
     render(){
         return(
             <>
@@ -38,9 +49,11 @@ class Cart extends React.Component{
                         justifyContent: 'flex-end'
                     }}
                     item xs={6} sm={6} lg={6} xl={6}>
-                        <Button variant="contained" color="primary">
-                            Checkout
-                        </Button>
+                        <Link component={RouterLink} to="/checkout">
+                            <Button variant="contained" color="primary">
+                                Checkout
+                            </Button>
+                        </Link>
                     </Grid>
                 </Grid>
                 <Grid container style={{padding: 24}}>
@@ -57,7 +70,7 @@ class Cart extends React.Component{
                 style={{padding: '10px 24px'}}>
                     <Grid item xs={6} sm={6} lg={6} xl={6}>
                         <Typography variant="button">
-                            <Link href="#">
+                            <Link component={RouterLink} to="/">
                                 Continue Shopping
                             </Link>
                         </Typography>
@@ -69,7 +82,7 @@ class Cart extends React.Component{
                     }} 
                     item xs={6} sm={6} lg={6} xl={6}>
                         <Typography component="h5" variant="h5">
-                            Total: $999
+                            Total: $ {this.getTotalCart()}
                         </Typography>
                     </Grid>
                 </Grid>
@@ -79,9 +92,11 @@ class Cart extends React.Component{
                 direction="row"
                 container 
                 style={{padding: '10px 24px'}}>
-                    <Button variant="contained" color="primary">
-                        Checkout
-                    </Button>
+                    <Link component={RouterLink} to="/checkout">
+                        <Button variant="contained" color="primary">
+                            Checkout
+                        </Button>
+                    </Link>
                 </Grid>
             </>
         )

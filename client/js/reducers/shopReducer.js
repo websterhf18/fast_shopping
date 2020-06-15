@@ -1,27 +1,8 @@
-import { PRODUCTS_RECEIVED } from "../actions";
+import { PRODUCTS_RECEIVED, ADD_PRODUCT } from "../actions";
 
 const initialProps = {
     products: [],
-    cart: [
-        {
-            title: 'Item1',
-            price: 800,
-            category: 'Cat1',
-            quantity: 1
-        },
-        {
-            title: 'Item1',
-            price: 800,
-            category: 'Cat1',
-            quantity: 2
-        },
-        {
-            title: 'Item1',
-            price: 800,
-            category: 'Cat1',
-            quantity: 1
-        }
-    ]
+    cart: []
 };
 
 export default (state = initialProps, { type, data }) => {
@@ -30,6 +11,11 @@ export default (state = initialProps, { type, data }) => {
             return {
                 ...state,
                 products: data
+            };
+        case ADD_PRODUCT:
+            return { 
+                ...state,
+                cart: [...state.cart, data]
             };
         default:
             return state;
