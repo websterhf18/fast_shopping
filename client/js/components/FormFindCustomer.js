@@ -2,6 +2,7 @@ import React from 'react'
 import {Field, reduxForm } from 'redux-form'
 
 import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
 
 const renderTextField = ({
         label,
@@ -16,41 +17,32 @@ const renderTextField = ({
         InputLabelProps={{
             shrink: true,
         }}
-        style={{ margin: 8 }}
         {...input}
         {...custom}
     />
 )
 
-let FormCustomer = props => {
+let FormFindCustomer = props => {
     const { handleSubmit } = props;
     return (
         <form onSubmit={handleSubmit}>
             <Field 
-            name="fullname" 
-            component={renderTextField} 
-            label="Full Name" />
-            <Field 
-            name="id" 
-            component={renderTextField} 
-            label="ID" />
-            <Field 
-            name="address" 
-            component={renderTextField} 
-            label="Address" />
-            <Field 
-            name="phone" 
-            component={renderTextField} 
-            label="Phone Number" />
-            <Field 
             name="email" 
             component={renderTextField} 
             label="Email" />
+            <Button
+            type="submit"
+            style={{
+                padding: '10px 24px'
+            }}
+            variant="contained" color="primary">
+                Lookup
+            </Button>
         </form>
     )
 }
-FormCustomer = reduxForm({
-    form: 'customer'
-})(FormCustomer)
+FormFindCustomer = reduxForm({
+    form: 'findcustomer'
+})(FormFindCustomer)
 
-export default FormCustomer
+export default FormFindCustomer

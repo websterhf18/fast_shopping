@@ -14,6 +14,7 @@ import Button from '@material-ui/core/Button';
 import Box from '@material-ui/core/Box';
 
 import FindCustomer from './FindCustomer';
+import FormCustomer from './FormCustomer';
 
 const mapStateToProps = state => {
     return {
@@ -26,40 +27,7 @@ function CheckoutCustomer(props){
         if(props.customerType == 'new'){
             return (
                 <>
-                    <TextField label="Full Name" style={{ margin: 8 }}
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}/>
-                    <TextField label="ID" style={{ margin: 8 }}
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />
-                    <TextField label="Address" style={{ margin: 8 }}
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    /> 
-                    <TextField label="Phone Number" style={{ margin: 8 }}
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />
-                    <TextField label="Email" style={{ margin: 8 }}
-                    fullWidth
-                    margin="normal"
-                    InputLabelProps={{
-                        shrink: true,
-                    }}
-                    />   
+                    <FormCustomer />    
                 </>
             );
         }else{

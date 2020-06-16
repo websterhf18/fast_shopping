@@ -4,7 +4,7 @@ import { connect, useDispatch } from "react-redux";
 import { requestCustomerAction, emptyCustomerAction } from "../actions";
 
 import { makeStyles } from '@material-ui/core/styles';
-import FormCustomer from './FormCustomer';
+import FormFindCustomer from './FormFindCustomer';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import Typography from '@material-ui/core/Typography';
 import Link from '@material-ui/core/Link';
@@ -40,15 +40,28 @@ function FindCustomer(props){
     if (props.customerData == null) {
         return (
             <>
-                <FormCustomer onSubmit={props.onSubmitForm}/>
+                <FormFindCustomer onSubmit={props.onSubmitForm}/>
                 {loadingContent(props.onLoading)}
+            </>
+        );
+    }else if(props.customerData.response == 'not-found'){
+        return (
+            <>
+                <Typography component="h5" variant="h5" style={{display: 'flex', padding: 6}}>
+                    Not Found Users!
+                </Typography>
+                <Link 
+                onClick={props.emptyCustomerData} 
+                style={{padding: 12}}>
+                Not Found User?, Lookup Again
+                </Link>
             </>
         );
     }
     return (
         <>
             <Typography component="h5" variant="h5" style={{display: 'flex', padding: 6}}>
-                Welcome Back, {props.customerData.fullname} 
+                Welcome back, {props.customerData.fullname} 
             </Typography>
             <Typography variant="body1" style={{display: 'flex', padding: 6}}>
                 ID: {props.customerData.id} 

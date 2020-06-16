@@ -6,7 +6,9 @@ import {
     UPDATE_CUSTOMER,
     REQUEST_CUSTOMER,
     RECEIVE_CUSTOMER, 
-    EMPTY_CUSTOMER
+    EMPTY_CUSTOMER,
+    REQUEST_ORDER,
+    RECEIVE_ORDER
 } from "../actions";
 
 const initialProps = {
@@ -14,7 +16,9 @@ const initialProps = {
     cart: [],
     customerType: 'new',
     customerData: null,
-    onLoading: false
+    onLoading: false,
+    onLoadingOrder: false,
+    orderData: null
 };
 export default (state = initialProps, { type, data }) => {
     switch (type) {
@@ -60,6 +64,17 @@ export default (state = initialProps, { type, data }) => {
             return { 
                 ...state,
                 customerData: null
+            };
+        case REQUEST_ORDER:
+            return { 
+                ...state,
+                onLoadingOrder: true
+            };
+        case RECEIVE_ORDER:
+            return { 
+                ...state,
+                onLoadingOrder: false,
+                orderData: data
             };
         default:
             return state;

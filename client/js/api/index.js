@@ -10,3 +10,14 @@ export function customerCall(data){
         body: data
     }).then(response => response.json());
 }
+
+export function orderCall(data){
+    return fetch('http://localhost:3000/api/orders', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(data)
+    }).then(response => response.json());
+}

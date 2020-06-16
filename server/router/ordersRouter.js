@@ -76,7 +76,7 @@ module.exports = server => {
     function createProductsOrder(product, order_id){
         var productOrder = models.Products_Order.create({
             quantity: product.quantity,
-            products_id: product.products_id,
+            products_id: product.id,
             orders_id: order_id 
         });
         return productOrder;

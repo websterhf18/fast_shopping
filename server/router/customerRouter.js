@@ -61,7 +61,7 @@ module.exports = server => {
                 }
             }).then(function(customers){
                 if(!customers){
-                    res.send(200, { response: "Not find customers" });
+                    res.send(200, { response: "not-found" });
                 }else{
                     res.send(customers);
                 }

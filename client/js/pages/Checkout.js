@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import { requestOrderAction } from "../actions";
 
 import Grid from '@material-ui/core/Grid';
 import Typography from '@material-ui/core/Typography';
@@ -10,9 +11,15 @@ import CheckoutSummary from '../components/CheckoutSummary';
 
 const mapStateToProps = state => {
     return {
-        cart: state.shop.cart
+        cart: state.shop.cart,
+        customerForm: state.form.customer,
+        customerData: state.shop.customerData,
+        customerType: state.shop.customerType
     }
 };
+const mapDispatchToProps = dispatch => ({
+    onCreateOrder: (data) => dispatch(requestOrderAction(data)),
+}); 
 class Checkout extends React.Component{
     getTotalCart(){
         var total = 0;
@@ -20,6 +27,19 @@ class Checkout extends React.Component{
             total += element.unit_price * element.quantity
         });
         return total;
+    }
+    createOrder(props){
+        var data = {
+            type_user: props.customerType,
+            info_user: {},
+            products: props.cart
+        }
+        if(props.customerType == 'new'){
+            data.info_user = props.customerForm.values;
+        }else if(props.customerData !== null){
+            data.info_user.id = props.customerData.id;
+        }
+        props.onCreateOrder(data)
     }
     render(){
         return(
@@ -59,7 +79,8 @@ class Checkout extends React.Component{
                         component="h5" variant="h5">
                             Total: $ {this.getTotalCart()}
                         </Typography>
-                        <Button 
+                        <Button
+                        onClick={() => this.createOrder(this.props)}
                         style={{
                             float: 'right',
                             padding: '10px 24px'
@@ -73,4 +94,4 @@ class Checkout extends React.Component{
         )
     }
 }
-export default connect(mapStateToProps, null)(Checkout);
+export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
