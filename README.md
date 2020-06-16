@@ -14,7 +14,7 @@ Fast shopping is a test for Sancrisoft Agency to build a small app which allows 
 
 `npm run client-dev` Run React Dev Server to HotReload Api Server NOT HOT RELOAD
 
-	   URL: localhost:3000/api-docs/ API documentation Swagger
+	URL: localhost:3000/api-docs/ API documentation Swagger
 
 ##  Environment Variables
 
