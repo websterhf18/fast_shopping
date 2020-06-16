@@ -5,3 +5,5 @@ dist
 .npm
 # Mac
 .DS_Store
+#.env
+.env

@@ -1,18 +1,20 @@
+const API_URL = process.env.API_URL;
+
 export function productsCall(){
-    return fetch('http://localhost:3000/api/products', {
+    return fetch(API_URL + '/api/products', {
         method: 'GET'
     }).then(response => response.json());
 }
 
 export function customerCall(data){
-    return fetch('http://localhost:3000/api/customer/find', {
+    return fetch(API_URL + '/api/customer/find', {
         method: 'POST',
         body: data
     }).then(response => response.json());
 }
 
 export function orderCall(data){
-    return fetch('http://localhost:3000/api/orders', {
+    return fetch(API_URL + '/api/orders', {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
