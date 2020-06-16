@@ -25,7 +25,7 @@ export default function CheckoutSummary({products}){
                                 <TableCell>{item.name}</TableCell>
                                 <TableCell>$ {item.unit_price}</TableCell>
                                 <TableCell>{item.quantity}</TableCell>
-                                <TableCell>$ {item.unit_price}</TableCell>
+                                <TableCell>$ {item.unit_price * item.quantity}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

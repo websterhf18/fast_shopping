@@ -13,18 +13,11 @@ const mapStateToProps = state => {
         cart: state.shop.cart
     }
 };
-const mapDispatchToProps = dispatch => ({
-    //onLoadProducts: () => dispatch(requestProducts())
-});
-
 class Checkout extends React.Component{
-    componentDidMount() {
-        //
-    }
     getTotalCart(){
         var total = 0;
         this.props.cart.forEach(element => {
-            total += element.unit_price
+            total += element.unit_price * element.quantity
         });
         return total;
     }
@@ -35,7 +28,7 @@ class Checkout extends React.Component{
                 container 
                 style={{padding: 24}}>
                     <Grid 
-                    item xs={6} sm={6} lg={6} xl={6}>
+                    item xs={6} sm={6} lg={6} xl={6} style={{padding: 12}}>
                         <Typography 
                         style={{
                             padding: '24px 0px'
@@ -46,7 +39,7 @@ class Checkout extends React.Component{
                         <CheckoutCustomer />
                     </Grid>
                     <Grid 
-                    item xs={6} sm={6} lg={6} xl={6}>
+                    item xs={6} sm={6} lg={6} xl={6} style={{padding: 12}}>
                         <Typography 
                         style={{
                             padding: '24px 0px'
@@ -80,4 +73,4 @@ class Checkout extends React.Component{
         )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Checkout);
+export default connect(mapStateToProps, null)(Checkout);

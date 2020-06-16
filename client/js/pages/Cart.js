@@ -16,10 +16,6 @@ const mapStateToProps = state => {
         cart: state.shop.cart
     }
 };
-const mapDispatchToProps = dispatch => ({
-    //onLoadProducts: () => dispatch(requestProducts())
-});
-
 class Cart extends React.Component{
     componentDidMount() {
         //
@@ -27,11 +23,10 @@ class Cart extends React.Component{
     getTotalCart(){
         var total = 0;
         this.props.cart.forEach(element => {
-            total += element.unit_price
+            total += element.unit_price * element.quantity
         });
         return total;
     }
-    
     render(){
         return(
             <>
@@ -60,6 +55,7 @@ class Cart extends React.Component{
                     { this.props.cart.map((item, index) => (
                         <Grid item xs={12} sm={12} lg={12} xl={12} style={{padding: 12}} key={index}>
                             <CartItem 
+                                index={index}
                                 product={item}
                             />
                         </Grid>
@@ -102,4 +98,4 @@ class Cart extends React.Component{
         )
     }
 }
-export default connect(mapStateToProps, mapDispatchToProps)(Cart);
+export default connect(mapStateToProps, null)(Cart);

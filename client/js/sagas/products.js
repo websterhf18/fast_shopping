@@ -1,12 +1,12 @@
 import { call, put, takeLatest } from 'redux-saga/effects'
 
-import apiCall from '../api';
+import { productsCall } from '../api';
 
 import { PRODUCTS_REQUEST, receiveProducts } from "../actions";
 
 function* fetchProducts({ payload }) {
     try {
-        const results = yield call(apiCall, 'get', 'http://localhost:3000/api/products');
+        const results = yield call(productsCall);
         yield put(receiveProducts(results));
     } catch (error) {
         

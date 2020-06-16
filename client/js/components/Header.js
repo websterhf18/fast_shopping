@@ -26,6 +26,13 @@ const mapStateToProps = state => {
 };
 function Header(props){
     const classes = useStyles();
+    const getQuantityCart = () => {
+        var quantity = 0;
+        props.cart.forEach(element => {
+            quantity += element.quantity
+        });
+        return quantity;
+    }
     return(
         <AppBar position="static">
             <Toolbar>
@@ -38,7 +45,7 @@ function Header(props){
                         color="inherit" 
                         aria-label="add to shopping cart">
                             <Badge
-                                badgeContent={props.cart.length}
+                                badgeContent={getQuantityCart()}
                                 color="secondary"
                                 anchorOrigin={{
                                     vertical: 'top',
