@@ -19,7 +19,7 @@ module.exports = () => {
       filename: "[name].js"
     }, // NEW Ends
     resolve: {
-      extensions: ['*', '.js', '.jsx']
+      extensions: ['.js', '.jsx']
     },
     devServer: {
       historyApiFallback: true,
