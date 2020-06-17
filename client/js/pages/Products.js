@@ -11,15 +11,18 @@ import Pagination from '@material-ui/lab/Pagination';
 import ProductItem from '../components/ProductItem';
 
 import { connect } from "react-redux";
-import { requestProducts } from '../actions';
+import { requestProducts, filterProductsAction } from '../actions';
+import _ from "lodash";
 
 const mapStateToProps = state => {
     return {
-        products: state.shop.products
+        products: state.shop.products,
+        filterType: state.shop.filterType
     }
 };
-const mapDispatchToProps = dispatch => ({
-    onLoadProducts: () => dispatch(requestProducts())
+const mapDispatchToProps = (dispatch) => ({
+    onLoadProducts: () => dispatch(requestProducts()),
+    onFilterProducts: (data) => dispatch(filterProductsAction(data))
 });
 const styles = theme => {
     return ({
@@ -33,6 +36,25 @@ const styles = theme => {
 class Products extends React.Component{
     componentDidMount() {
         this.props.onLoadProducts();
+    }
+    filterProducts(e, props){
+        var productsFilter = props.products;
+        switch (e.target.value) {
+            case 'default':
+                productsFilter = _.orderBy(props.products, ['id'], ['asc']);
+                break;
+            case 'lowest':
+                productsFilter = _.orderBy(props.products, ['unit_price'], ['asc']);
+                break;
+            case 'recent':
+                productsFilter = _.orderBy(props.products, ['name'], ['asc']);
+                break;
+        }
+       var dataDispatch = {
+            filterValue: e.target.value,
+            newOrder: productsFilter
+        }
+        this.props.onFilterProducts(dataDispatch)
     }
     render() {
         const { classes } = this.props;
@@ -49,11 +71,12 @@ class Products extends React.Component{
                         <Select
                         labelId="demo-simple-select-label"
                         id="demo-simple-select"
-                        value={''}
+                        value={this.props.filterType}
+                        onChange={ (e) => { this.filterProducts(e, this.props) }}
                         >
-                            <MenuItem value={10}>Ten</MenuItem>
-                            <MenuItem value={20}>Twenty</MenuItem>
-                            <MenuItem value={30}>Thirty</MenuItem>
+                            <MenuItem value={'default'}>Alpha Order</MenuItem>
+                            <MenuItem value={'lowest'}>Lowest Price</MenuItem>
+                            <MenuItem value={'recent'}>Most Recent</MenuItem>
                         </Select>
                     </FormControl>
                 </Grid>
@@ -71,7 +94,7 @@ class Products extends React.Component{
                 justify="center"
                 container 
                 style={{padding: 24}}>
-                    <Pagination count={10} color="primary" size="large" />
+                    
                 </Grid>
             </>
         )

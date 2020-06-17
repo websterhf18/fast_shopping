@@ -12,6 +12,8 @@ export const EMPTY_CUSTOMER = "EMPTY_CUSTOMER";
 export const REQUEST_ORDER = "REQUEST_ORDER";
 export const RECEIVE_ORDER = "RECEIVE_ORDER";
 
+export const FILTER_PRODUCTS = "FILTER_PRODUCTS";
+
 export const requestProducts = () => ({ type: PRODUCTS_REQUEST });
 export const receiveProducts = data => ({ type: PRODUCTS_RECEIVED, data });
 export const addProductCart = data => ({ type: ADD_PRODUCT, data });
@@ -25,3 +27,5 @@ export const emptyCustomerAction = () => ({ type: EMPTY_CUSTOMER });
 
 export const requestOrderAction = data => ({ type: REQUEST_ORDER, data });
 export const receiveOrderAction = data => ({ type: RECEIVE_ORDER, data });
+
+export const filterProductsAction = data => ({ type: FILTER_PRODUCTS, data });

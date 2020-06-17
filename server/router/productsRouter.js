@@ -9,7 +9,7 @@ module.exports = server => {
      *           quantity:
      *               type: integer
      *               format: int32
-     *           product_id:
+     *           id:
      *               type: integer
      *               format: int32
      * /api/products:

@@ -33,6 +33,8 @@ Fast shopping is a test for Sancrisoft Agency to build a small app which allows 
 
 [Production Fast Shop](https://sancrisoft.kapei.dev)
 
+[Api-docs Fast Shop](https://sancrisoft.kapei.dev/api-docs)
+
 ## Steps to instal locally the project
 
 Step 1: Clone the project on your local device

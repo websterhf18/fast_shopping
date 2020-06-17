@@ -8,7 +8,8 @@ import {
     RECEIVE_CUSTOMER, 
     EMPTY_CUSTOMER,
     REQUEST_ORDER,
-    RECEIVE_ORDER
+    RECEIVE_ORDER,
+    FILTER_PRODUCTS
 } from "../actions";
 
 const initialProps = {
@@ -18,7 +19,8 @@ const initialProps = {
     customerData: null,
     onLoading: false,
     onLoadingOrder: false,
-    orderData: null
+    orderData: null,
+    filterType: 'default'
 };
 export default (state = initialProps, { type, data }) => {
     switch (type) {
@@ -75,6 +77,12 @@ export default (state = initialProps, { type, data }) => {
                 ...state,
                 onLoadingOrder: false,
                 orderData: data
+            };
+        case FILTER_PRODUCTS:
+            return { 
+                ...state,
+                filterType: data.filterValue,
+                products: data.newOrder
             };
         default:
             return state;
