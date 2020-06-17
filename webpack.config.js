@@ -1,23 +1,18 @@
-const HtmlWebPackPlugin = require("html-webpack-plugin");
+const HtmlWebpackPlugin = require("html-webpack-plugin");
 const path = require('path');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
-const htmlPlugin = new HtmlWebPackPlugin({
-  template: "./client/index.html", 
-  filename: "./index.html"
-});
 const env = dotenv.config().parsed;
 const envKeys = Object.keys(env).reduce((prev, next) => {
   prev[`process.env.${next}`] = JSON.stringify(env[next]);
   return prev;
 }, {});
-const envConfig = new webpack.DefinePlugin(envKeys);
-
-module.exports ={
-  entry: './client/js/index.js',
+const envConfig = new webpack.DefinePlugin(envKeys)
+module.exports = {
+  entry: path.resolve(__dirname, 'client/js', 'index.js'),
   output: { // NEW
     path: path.resolve(__dirname, 'dist'),
-    filename: "app.bundle.js"
+    filename: "bundle.js"
   }, // NEW Ends
   resolve: {
     extensions: ['.js', '.jsx']
@@ -26,7 +21,9 @@ module.exports ={
     historyApiFallback: true,
   },
   plugins: [
-    htmlPlugin,
+    new HtmlWebpackPlugin({ 
+      template: path.resolve(__dirname, 'client', 'index.html') 
+    }),
     envConfig
   ],
   module: {
