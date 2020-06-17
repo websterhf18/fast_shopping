@@ -15,7 +15,8 @@ module.exports = {
     filename: "bundle.js"
   }, // NEW Ends
   resolve: {
-    extensions: ['.js', '.jsx']
+    modulesDirectories: ['node_modules', 'client/js'],
+    extensions: ['', '.js', '.jsx']
   },
   devServer: {
     historyApiFallback: true,
