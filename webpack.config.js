@@ -1,4 +1,5 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
@@ -13,10 +14,10 @@ module.exports = () => {
     return prev;
   }, {});
   return {
-    entry: path.join(__dirname, "client/js/index.js"),
+    entry: './client/js/index.js',
     output: { // NEW
-      path: path.join(__dirname, 'dist'),
-      filename: "[name].js"
+      path: path.resolve(__dirname, 'dist'),
+      filename: "app.bundle.js"
     }, // NEW Ends
     resolve: {
       extensions: ['.js', '.jsx']
@@ -26,15 +27,19 @@ module.exports = () => {
     },
     plugins: [
       htmlPlugin,
-      new webpack.DefinePlugin(envKeys)
+      new webpack.DefinePlugin(envKeys),
+      new CleanWebpackPlugin(['./dist']),
     ],
     module: {
       rules: [
         {
           test: /\.(js|jsx)$/,
-          exclude: /node_modules/,
+          exclude: /(node_modules|bower_components)/,
           use: {
-            loader: "babel-loader"
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/react', '@babel/env']
+            }
           }
         },
         {
