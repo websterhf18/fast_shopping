@@ -1,9 +1,7 @@
 const HtmlWebPackPlugin = require("html-webpack-plugin");
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const path = require('path');
 const dotenv = require('dotenv');
 const webpack = require('webpack');
-const CleanWebpackConfig = new CleanWebpackPlugin(['./dist'])
 const htmlPlugin = new HtmlWebPackPlugin({
   template: "./client/index.html", 
   filename: "./index.html"
@@ -28,7 +26,6 @@ module.exports = () => {
     },
     plugins: [
       htmlPlugin,
-      CleanWebpackConfig,
       new webpack.DefinePlugin(envKeys),
     ],
     module: {
