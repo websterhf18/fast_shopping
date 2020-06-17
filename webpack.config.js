@@ -13,7 +13,7 @@ module.exports = () => {
     return prev;
   }, {});
   return {
-    entry: path.resolve(__dirname, 'client') + "/js/index.js",
+    entry: path.join(__dirname, "client/js/index.js"),
     output: { // NEW
       path: path.join(__dirname, 'dist'),
       filename: "[name].js"
