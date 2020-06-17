@@ -15,7 +15,7 @@ module.exports = {
     filename: "bundle.js"
   }, // NEW Ends
   resolve: {
-    modulesDirectories: ['node_modules', 'client/js'],
+    modules: ['node_modules', 'client/js'],
     extensions: ['*', '.js', '.jsx']
   },
   devServer: {
