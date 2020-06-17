@@ -7,7 +7,7 @@ const cors = corsMiddleware({
   allowHeaders: ["Authorization"],
   exposeHeaders: ["Authorization"]
 });
-const { port } = require('./config');
+const { port, forceSwagger } = require('./config');
 const server = restify.createServer({
   name: 'FastShopping',
   ignoreTrailingSlash: true
@@ -50,6 +50,7 @@ restifySwaggerJsdoc.createSwaggerPage({
     version: '1.0.0',
     server: server,
     path: '/api-docs',
+    forceSecure: forceSwagger,
     apis: [ `${__dirname}/router/*.js` ], 
 });
 server.listen(port);

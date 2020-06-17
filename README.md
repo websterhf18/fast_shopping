@@ -27,6 +27,7 @@ Fast shopping is a test for Sancrisoft Agency to build a small app which allows 
     DB_PASSWORD=root //Pass Of MYSQL Server
      
     API_URL=http://localhost:3000 // Complete URL of App
+    HTTPS_SWAGGER=false // If on secure server change true
 
 ## Production URL
 

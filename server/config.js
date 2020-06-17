@@ -6,5 +6,6 @@ module.exports = {
     dbPort: process.env.DB_PORT,
     dbDatabase: process.env.DB_DATABASE,
     dbUser: process.env.DB_USERNAME,
-    dbPass: process.env.DB_PASSWORD
+    dbPass: process.env.DB_PASSWORD,
+    forceSwagger: process.env.HTTPS_SWAGGER
 };
